@@ -43,15 +43,26 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.ParseButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.sourceTextBox = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.ParseButton = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.openGrammarDialog = new System.Windows.Forms.OpenFileDialog();
+            this.parseTreeView = new System.Windows.Forms.TreeView();
+            this.openSourceDialog = new System.Windows.Forms.OpenFileDialog();
+            this.parseActionsView = new System.Windows.Forms.ListView();
+            this.actionHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.positionHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lineHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.descriptionHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.valueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.stateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -59,10 +70,11 @@
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -118,7 +130,7 @@
             // testGrammarToolStripMenuItem
             // 
             this.testGrammarToolStripMenuItem.Name = "testGrammarToolStripMenuItem";
-            this.testGrammarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testGrammarToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.testGrammarToolStripMenuItem.Text = "Test Grammar";
             // 
             // panel2
@@ -206,26 +218,45 @@
             this.tabPage4.Text = "Source Code";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.button1);
+            this.panel5.Controls.Add(this.ParseButton);
+            this.panel5.Location = new System.Drawing.Point(6, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(950, 27);
+            this.panel5.TabIndex = 1;
+            // 
+            // ParseButton
+            // 
+            this.ParseButton.Location = new System.Drawing.Point(103, 4);
+            this.ParseButton.Name = "ParseButton";
+            this.ParseButton.Size = new System.Drawing.Size(75, 23);
+            this.ParseButton.TabIndex = 0;
+            this.ParseButton.Text = "Parse";
+            this.ParseButton.UseVisualStyleBackColor = true;
+            this.ParseButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.richTextBox1);
+            this.panel4.Controls.Add(this.sourceTextBox);
             this.panel4.Location = new System.Drawing.Point(6, 33);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1793, 841);
             this.panel4.TabIndex = 0;
             // 
-            // richTextBox1
+            // sourceTextBox
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1793, 841);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.sourceTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sourceTextBox.Location = new System.Drawing.Point(0, 0);
+            this.sourceTextBox.Name = "sourceTextBox";
+            this.sourceTextBox.Size = new System.Drawing.Size(1793, 841);
+            this.sourceTextBox.TabIndex = 0;
+            this.sourceTextBox.Text = "";
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.listView1);
+            this.tabPage5.Controls.Add(this.parseActionsView);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -236,6 +267,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.parseTreeView);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
@@ -264,32 +296,86 @@
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             // 
-            // panel5
+            // button1
             // 
-            this.panel5.Controls.Add(this.ParseButton);
-            this.panel5.Location = new System.Drawing.Point(6, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(950, 27);
-            this.panel5.TabIndex = 1;
+            this.button1.Location = new System.Drawing.Point(3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Select Source";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // ParseButton
+            // openGrammarDialog
             // 
-            this.ParseButton.Location = new System.Drawing.Point(3, 3);
-            this.ParseButton.Name = "ParseButton";
-            this.ParseButton.Size = new System.Drawing.Size(75, 23);
-            this.ParseButton.TabIndex = 0;
-            this.ParseButton.Text = "Parse";
-            this.ParseButton.UseVisualStyleBackColor = true;
-            this.ParseButton.Click += new System.EventHandler(this.button1_Click);
+            this.openGrammarDialog.FileName = "openFileDialog1";
             // 
-            // listView1
+            // parseTreeView
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1789, 828);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.parseTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.parseTreeView.Location = new System.Drawing.Point(3, 3);
+            this.parseTreeView.Name = "parseTreeView";
+            this.parseTreeView.Size = new System.Drawing.Size(1789, 828);
+            this.parseTreeView.TabIndex = 0;
+            // 
+            // openSourceDialog
+            // 
+            this.openSourceDialog.FileName = "openFileDialog1";
+            // 
+            // parseActionsView
+            // 
+            this.parseActionsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.actionHeader,
+            this.positionHeader,
+            this.lineHeader,
+            this.columnHeader,
+            this.descriptionHeader,
+            this.valueHeader,
+            this.stateHeader});
+            this.parseActionsView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.parseActionsView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.parseActionsView.FullRowSelect = true;
+            this.parseActionsView.GridLines = true;
+            this.parseActionsView.Location = new System.Drawing.Point(3, 3);
+            this.parseActionsView.Name = "parseActionsView";
+            this.parseActionsView.Size = new System.Drawing.Size(1789, 828);
+            this.parseActionsView.TabIndex = 1;
+            this.parseActionsView.UseCompatibleStateImageBehavior = false;
+            this.parseActionsView.View = System.Windows.Forms.View.Details;
+            // 
+            // actionHeader
+            // 
+            this.actionHeader.Text = "Action";
+            this.actionHeader.Width = 110;
+            // 
+            // positionHeader
+            // 
+            this.positionHeader.Text = "pos";
+            this.positionHeader.Width = 57;
+            // 
+            // lineHeader
+            // 
+            this.lineHeader.Text = "ln";
+            this.lineHeader.Width = 39;
+            // 
+            // columnHeader
+            // 
+            this.columnHeader.Text = "col";
+            this.columnHeader.Width = 38;
+            // 
+            // descriptionHeader
+            // 
+            this.descriptionHeader.Text = "Description";
+            this.descriptionHeader.Width = 285;
+            // 
+            // valueHeader
+            // 
+            this.valueHeader.Text = "Value";
+            this.valueHeader.Width = 145;
+            // 
+            // stateHeader
+            // 
+            this.stateHeader.Text = "State";
+            this.stateHeader.Width = 81;
             // 
             // mainForm
             // 
@@ -311,10 +397,11 @@
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,13 +426,24 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox sourceTextBox;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button ParseButton;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog openGrammarDialog;
+        private System.Windows.Forms.TreeView parseTreeView;
+        private System.Windows.Forms.OpenFileDialog openSourceDialog;
+        private System.Windows.Forms.ListView parseActionsView;
+        private System.Windows.Forms.ColumnHeader actionHeader;
+        private System.Windows.Forms.ColumnHeader positionHeader;
+        private System.Windows.Forms.ColumnHeader lineHeader;
+        private System.Windows.Forms.ColumnHeader columnHeader;
+        private System.Windows.Forms.ColumnHeader descriptionHeader;
+        private System.Windows.Forms.ColumnHeader valueHeader;
+        private System.Windows.Forms.ColumnHeader stateHeader;
     }
 }
 
